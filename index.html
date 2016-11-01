@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SCV Hangman</title>
+</head>
+<body>
+
+	<div>
+		<p id="hangman">* Press any key to get started!</p>
+	</div>
+
+<script>
+	//List of Hangman words
+	var company = ["teslas",
+	"apple",
+	"face"];
+	var guessLeft = 12;
+	var guessLetters = "h";
+	var userGuess = "z";
+	var computerGuess ="";
+
+	// Hangman Object
+	var hangman = {
+
+		letterInput: function(userGuess){
+			// console.log(userGuess);
+			// var indices = [];
+			// var blanks = "";
+			// for (var i = 0; i<computerGuess.length; i++) {
+			// 	// console.log(computerGuess[i]);
+			// 	if (computerGuess[i] === userGuess) {
+			// 		indices.push(i);
+			// 		console.log(indices);
+			// 		var blanks = blanks + userGuess;
+			// 	}else{
+			// 		console.log("False");
+			// 		var blanks = blanks + " _ "
+			// 	}
+			// }
+
+			// // Printing to the document
+			// var html = "<p>* Press any key to get started!</p>" +
+			// "<p>Current Word</p>" + blanks +
+			// "<p>Number of Guesses Remaining</p>" + guessLeft +
+			// "<p>Letters Already Guessed</p>" + guessLetters;
+
+			// // Placing the html into the hangman ID
+			// document.querySelector("#hangman").innerHTML = html;
+
+			
+
+		}
+
+	}
+	// This sets the computer guess equal to the random.
+	var computerGuess = company[Math.floor(Math.random() * company.length)];
+
+	//Initailizing Blanks
+	var blanks = "";
+
+	//For loop to print blanks
+	for (var i = 0; i < computerGuess.length; i++){
+		console.log(computerGuess[i]);
+		
+		var blanks = "_ " + blanks;
+	}
+
+	// Printing to the document
+	var htmls = "<p>* Press any key to get started!</p>" +
+	"<p>Current Word</p>" + blanks +
+	"<p>Number of Guesses Remaining</p>" + guessLeft +
+	"<p>Letters Already Guessed</p>" + guessLetters;
+
+	// Placing the html into the hangman ID
+	document.querySelector("#hangman").innerHTML = htmls;
+
+// User Presses key and sets variable to userGuess
+document.onkeyup = function(event) {
+	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+
+	//hangman.letterInput(userGuess);
+
+	// var letter = computerGuess.includes(userGuess);
+	// console.log(letter);
+
+	console.log(userGuess);
+	var indices = [];
+	var blanks = "";
+	for (var i = 0; i<computerGuess.length; i++) {
+		// console.log(computerGuess[i]);
+
+		if (computerGuess[i] === userGuess) {
+			indices.push(i);
+			var blanks = blanks + userGuess;
+			console.log(blanks);
+		}else{
+			console.log("False");
+			var blanks = blanks + " _ "
+		}
+
+		
+	}
+
+	// Printing to the document
+	var html = "<p>* Press any key to get started!</p>" +
+	"<p>Current Word</p>" + blanks +
+	"<p>Number of Guesses Remaining</p>" + guessLeft +
+	"<p>Letters Already Guessed</p>" + guessLetters;
+
+	// Placing the html into the hangman ID
+	document.querySelector("#hangman").innerHTML = html;
+
+
+
+}
+
+
+
+</script>
+	
+</body>
+</html>
