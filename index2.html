@@ -15,9 +15,145 @@
 	"apple",
 	"face"];
 
-	function computerGuess()
+	//Guesses Left
+	var guessLeft = 12;
+
+	//Guessed Letters Empty variable
+	var guessLetters = ["h"];
+
+	//This runs when the page loads
+  	var gameAnswer = computerGuess(company);
+	var spaces = printBlanks(gameAnswer);
+	printDoc(spaces, guessLeft, guessLetters);
+
+	// This sets the computer guess equal to the random.
+	function computerGuess(){
+		var random = company[Math.floor(Math.random() * company.length)];
+		return random;
+	}
+
+	//Function to print blanks
+	function printBlanks(){
+		//Initailizing Blanks
+		var blanks = "";
+
+		//For loop to print blanks
+		for (var i = 0; i < gameAnswer.length; i++){
+			console.log(gameAnswer);
+			var blanks = "_" + blanks;
+		}
+
+		return blanks; 
+	}
+
+	//Function prints to the document
+	function printDoc(dash, guessLeft, guessLetters){
+
+		// Printing to the document
+		var htmls = "<p>* Press any key to get started!</p>" +
+		"<p>Current Word</p>" + dash +
+		"<p>Number of Guesses Remaining</p>" + guessLeft +
+		"<p>Letters Already Guessed</p>" + guessLetters;
+
+		// Placing the html into the hangman ID
+		return document.querySelector("#hangman").innerHTML = htmls;
+	}
+
+	
+	
+	//Function to find index of a letter in a string returning an index value
+	function checkLetter(letter){
+		var pos = 0;
+		var num = -1;
+		var i = -1;
+
+		while (pos != -1) {
+		    pos = gameAnswer.indexOf(letter, i + 1);
+		    if (pos>=0){
+		    	updateBlanks(pos, letter, spaces);
+		    }
+		    else{
+		    }
+
+		    console.log(pos);
+		    num += 1;
+		    i = pos;
+	  	}
+  	}
+
+  	function updateBlanks(pos, guess, spaced){
+  		spaces = spaced.substr(0,pos) + guess + spaced.substr(pos+1, spaced.length);
+
+ 
+  		console.log(spaces);
+
+  	}
 
 
+  	
+
+// User Presses key and sets variable to userGuess
+document.onkeyup = function(event) {
+	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+
+	console.log(userGuess);
+	checkLetter(userGuess);
+
+
+	//console.log(gameAnswer.indexOf(userGuess));
+
+	
+   //console.log(i)
+  // Search the string and counts the number of e's
+
+
+
+	// for (var i = 0; i<gameAnswer.length; i++) {
+	// 	// console.log(computerGuess[i]);
+
+	// 	if (gameAnswer[i] === userGuess) {
+	// 		str.replace()
+	// 		console.log(blanks);
+	// 	}else{
+	// 		console.log("False");
+	// 		var blanks = blanks + " _ "
+	// 	}
+
+	//  }
+
+
+	
+	// console.log(check);
+	
+	// var blanks = "";
+	// for (var i = 0; i<computerGuess.length; i++) {
+	// 	// console.log(computerGuess[i]);
+
+	// 	if (computerGuess[i] === userGuess) {
+	// 		indices.push(i);
+	// 		var blanks = blanks + userGuess;
+	// 		console.log(blanks);
+	// 	}else{
+	// 		console.log("False");
+	// 		var blanks = blanks + " _ "
+	// 	}
+
+		
+	// }
+
+
+	// // Printing to the document
+	// var html = "<p>* Press any key to get started!</p>" +
+	// "<p>Current Word</p>" + blanks +
+	// "<p>Number of Guesses Remaining</p>" + guessLeft +
+	// "<p>Letters Already Guessed</p>" + guessLetters;
+
+	// // Placing the html into the hangman ID
+	// document.querySelector("#hangman").innerHTML = html;
+
+
+
+}
 
 </script>
 

@@ -16,43 +16,10 @@
 	"apple",
 	"face"];
 	var guessLeft = 12;
-	var guessLetters = "h";
-	var userGuess = "z";
+	var guessLetters = "";
+	var userGuess = "";
 	var computerGuess ="";
 
-	// Hangman Object
-	var hangman = {
-
-		letterInput: function(userGuess){
-			// console.log(userGuess);
-			// var indices = [];
-			// var blanks = "";
-			// for (var i = 0; i<computerGuess.length; i++) {
-			// 	// console.log(computerGuess[i]);
-			// 	if (computerGuess[i] === userGuess) {
-			// 		indices.push(i);
-			// 		console.log(indices);
-			// 		var blanks = blanks + userGuess;
-			// 	}else{
-			// 		console.log("False");
-			// 		var blanks = blanks + " _ "
-			// 	}
-			// }
-
-			// // Printing to the document
-			// var html = "<p>* Press any key to get started!</p>" +
-			// "<p>Current Word</p>" + blanks +
-			// "<p>Number of Guesses Remaining</p>" + guessLeft +
-			// "<p>Letters Already Guessed</p>" + guessLetters;
-
-			// // Placing the html into the hangman ID
-			// document.querySelector("#hangman").innerHTML = html;
-
-			
-
-		}
-
-	}
 	// This sets the computer guess equal to the random.
 	var computerGuess = company[Math.floor(Math.random() * company.length)];
 
@@ -63,36 +30,26 @@
 	for (var i = 0; i < computerGuess.length; i++){
 		console.log(computerGuess[i]);
 		
-		var blanks = "_ " + blanks;
+		var blanks = "_" + blanks;
 	}
 
-	// Printing to the document
-	var htmls = "<p>* Press any key to get started!</p>" +
-	"<p>Current Word</p>" + blanks +
-	"<p>Number of Guesses Remaining</p>" + guessLeft +
-	"<p>Letters Already Guessed</p>" + guessLetters;
-
-	// Placing the html into the hangman ID
-	document.querySelector("#hangman").innerHTML = htmls;
+	var indices = [];
+	// var blanks = "";
 
 // User Presses key and sets variable to userGuess
 document.onkeyup = function(event) {
 	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
 
-	//hangman.letterInput(userGuess);
-
-	// var letter = computerGuess.includes(userGuess);
-	// console.log(letter);
-
 	console.log(userGuess);
-	var indices = [];
+	
 	var blanks = "";
 	for (var i = 0; i<computerGuess.length; i++) {
 		// console.log(computerGuess[i]);
 
 		if (computerGuess[i] === userGuess) {
 			indices.push(i);
-			var blanks = blanks + userGuess;
+			blanks = blanks.substr(0,i) + userGuess + blanks.substr(i+1);
+			
 			console.log(blanks);
 		}else{
 			console.log("False");
@@ -101,6 +58,7 @@ document.onkeyup = function(event) {
 
 		
 	}
+
 
 	// Printing to the document
 	var html = "<p>* Press any key to get started!</p>" +
