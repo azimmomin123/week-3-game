@@ -7,24 +7,23 @@
 <body>
 	<div> 
 		<p id="hangman">* Press any key to get started!</p>
+		<!-- <p id="hangman1">* Press any key to get started!</p> -->
 	</div>
 
 <script>
 	//List of Hangman words
-	var company = ["a",
-	"2b",
-	"3cc",
-	"4ccc",
-	"5dddd",
-	"6eeeee",
-	"7ffffff",
-	"8ggggggg"];
+	var company = ["face",
+	"apple",
+	"teslas"];
 
 	//Guesses Left
 	var guessLeft = 3;
 
 	//Guessed Letters Empty variable
 	var guessLetters = ["h"];
+	var blanks = "";
+	var gameAnswer = "";
+	var spaces = "";
 
 	//This runs when the page loads
   	var gameAnswer = computerGuess(company);
@@ -41,23 +40,24 @@
 	//Function to print blanks
 	function printBlanks(abc){
 		//Initailizing Blanks
-		var blanks = "";
+		//var blanks = "";
 
 		//For loop to print blanks
 		for (var i = 0; i < abc.length; i++){
 			console.log(abc);
-			var blanks = "?" + blanks;
-
+			if (i === 0){
+				var blanks = "?";
+			}else {
+				var blanks = "?" + blanks;
+			}
 		}
-
-		
-		return blanks; 
-
-
+		return blanks;
 	}
 
 	//Function prints to the document
 	function printDoc(dash, guessLeft, guessLetters){
+		console.log(dash);
+		console.log(guessLeft);
 
 		// Printing to the document
 		var htmls = "<p>* Press any key to get started!</p>" +
@@ -66,36 +66,41 @@
 		"<p>Letters Already Guessed</p>" + guessLetters;
 
 		// Placing the html into the hangman ID
-		return document.querySelector("#hangman").innerHTML = htmls;
+		//return document.querySelector("#hangman").innerHTML = htmls;
+		return document.getElementById("hangman").innerHTML = htmls;
 	}
 
 	//Function prints to the document
 	function printDoc1(dash, guessLeft, guessLetters){
 
 		// Printing to the document
-		var htmls = "<p>* Press any key to get started!</p>" +
+		var doc = "<p>* Press any key to get started!</p>" +
 		"<p>Current Word</p>" + dash +
 		"<p>Number of Guesses Remaining</p>" + guessLeft +
 		"<p>Letters Already Guessed</p>" + guessLetters;
 
 		// Placing the html into the hangman ID
-		return document.querySelector("#hangman").innerHTML = htmls;
+		return document.querySelector("#hangman1").innerHTML = doc;
+
 	}
 	
 	
 	//Function to find index of a letter in a string returning an index value
 	function checkLetter(letter){
 		var pos = 0;
-		var num = -1;
 		var i = -1;
 
 		while (pos != -1) {
 		    pos = gameAnswer.indexOf(letter, i + 1);
-		    console.log(i);
 		    if (pos>=0){
 		    	updateBlanks(pos, letter, spaces);
+		    	//Checks string to see if it has any unguessed spaces if not then will alert WINNER!
+		    	// if (spaces.includes("?") === false){
+		    	// 	alert("Winner Winner! Chicken Dinner!");
+		    	// 	resetGame();
+		    	// }
 		    }
-		    //Making sure that the users first guess is incorrect to decrease the guesses left
+		    //Making sure that the users first guess is incorrect to decrease the guesses left. Pos = -1 when it can not find the letter. 
 		    else if (i === -1 && pos === -1){
 		    	guessLeft = guessLeft - 1;
 		    	//if guess left is less than 0 then end the game. 
@@ -109,7 +114,6 @@
 		    else{
 
 		    }
-		    num += 1;
 		    i = pos;
 	  	}
   	}
@@ -118,20 +122,23 @@
   		spaces = spaced.substr(0,pos) + guess + spaced.substr(pos+1, spaced.length);
 		console.log(spaces);
 
+
   	}
 
  	function resetGame(){
 		//This runs when the page loads
 	  	var gameAnswer = computerGuess(company);
-	  	console.log(gameAnswer);
+	  	//console.log(gameAnswer);
 		var spaces = printBlanks(gameAnswer);
 		console.log(spaces);
-		printDoc(spaces,guessLeft, guessLetters);
+		printDoc(spaces,guessLeft, guessLetters);  // issue is here
 
 		// User Presses key and sets variable to userGuess
 		document.onkeyup = function(event) {
 			var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+			console.log(gameAnswer);
 			printDoc(spaces,guessLeft, guessLetters);
+			console.log(gameAnswer);
 			checkLetter(userGuess);
 			printDoc(spaces,guessLeft, guessLetters);
 		}
@@ -139,6 +146,25 @@
 		guessLeft = 3;
 		console.log(gameAnswer);
 	}
+
+ // 	function resetGame(){
+
+	// 	// User Presses key and sets variable to userGuess
+	// 	document.onkeyup = function(event) {
+	// 		var userGuess = String.fromCharCode(event.keyCode).toLowerCase(); // press space to start new game
+	// 		//This runs when the page loads
+	// 	  	var gameAnswer = computerGuess(company);
+	// 	  	//console.log(gameAnswer);
+	// 		var spaces = printBlanks(gameAnswer);
+	// 		console.log(spaces);
+	// 		printDoc(spaces,guessLeft, guessLetters);
+	// 		checkLetter(userGuess);
+	// 		printDoc(spaces,guessLeft, guessLetters);
+	// 	}
+
+	// 	guessLeft = 3;
+	// 	console.log(gameAnswer);
+	// }
 
 
   	
@@ -149,9 +175,9 @@ document.onkeyup = function(event) {
 
 	console.log(userGuess);
 	checkLetter(userGuess);
-	console.log(spaces);
+	//console.log(spaces);
 	printDoc(spaces,guessLeft, guessLetters);
-	console.log(spaces);
+	//console.log(spaces);
 
 }
 
