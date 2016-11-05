@@ -85,10 +85,11 @@
 		    if (pos>=0){
 		    	updateBlanks(pos, letter, spaces);
 		    	//Checks string to see if it has any unguessed spaces if not then will alert WINNER!
-		    	// if (spaces.includes("?") === false){
-		    	// 	alert("Winner Winner! Chicken Dinner!");
-		    	// 	resetGame();
-		    	// }
+		    	if (spaces.includes("?") === false){
+		    		alert("Winner Winner! Chicken Dinner!");
+		    		wins += 1;
+		    		//resetGame();
+		    	}
 		    }
 		    //Making sure that the users first guess is incorrect to decrease the guesses left. Pos = -1 when it can not find the letter. 
 		    else if (i === -1 && pos === -1){

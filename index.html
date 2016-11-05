@@ -2,80 +2,42 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>SCV Hangman</title>
+	<title>index</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
-<body>
+<body align="center">
+		<!-- <p id="hangman">* Press any key to get started!</p> -->
+	<div class="container">
+		<div class="row">
+			<h1 >Welcome to Silicon Valley Hangman!</h1>
+		</div>
+		<div class="row top-buffer">
+			<div class="col-lg-6">
+				<img src="assets/images/sv.png">
+			</div>
+			  <!-- Panel -->
+				<div class="col-md-6 sidebar">
+					<div class="panel panel-default">
+					  <div class="panel-heading text-center">Guess a company in Silicon Valley, California!</div>
+					  	<div class="panel-body row">		
+							<p>* Press any key to get started!</p>
+							<p>Current Word: <span id = "dash"></span></p>
+							<p>Number of Guesses Remaining: <span id = "guessLeft"></span></p>
+							<p>Wins: <span id = "wins"></span></p>
+							<p>Letters Already Guessed: <span id = "guessLetters"></span></p>
+						</div>				
+					</div>
+				</div>	
+			<div class="col-lg-2"></div>
+		</div>
+		
 
-	<div>
-		<p id="hangman">* Press any key to get started!</p>
+	</div>
+		
 	</div>
 
-<script>
-	//List of Hangman words
-	var company = ["teslas",
-	"apple",
-	"face"];
-	var guessLeft = 12;
-	var guessLetters = "";
-	var userGuess = "";
-	var computerGuess ="";
-
-	// This sets the computer guess equal to the random.
-	var computerGuess = company[Math.floor(Math.random() * company.length)];
-
-	//Initailizing Blanks
-	var blanks = "";
-
-	//For loop to print blanks
-	for (var i = 0; i < computerGuess.length; i++){
-		console.log(computerGuess[i]);
-		
-		var blanks = "_" + blanks;
-	}
-
-	var indices = [];
-	// var blanks = "";
-
-// User Presses key and sets variable to userGuess
-document.onkeyup = function(event) {
-	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-
-	console.log(userGuess);
-	
-	var blanks = "";
-	for (var i = 0; i<computerGuess.length; i++) {
-		// console.log(computerGuess[i]);
-
-		if (computerGuess[i] === userGuess) {
-			indices.push(i);
-			blanks = blanks.substr(0,i) + userGuess + blanks.substr(i+1);
-			
-			console.log(blanks);
-		}else{
-			console.log("False");
-			var blanks = blanks + " _ "
-		}
-
-		
-	}
-
-
-	// Printing to the document
-	var html = "<p>* Press any key to get started!</p>" +
-	"<p>Current Word</p>" + blanks +
-	"<p>Number of Guesses Remaining</p>" + guessLeft +
-	"<p>Letters Already Guessed</p>" + guessLetters;
-
-	// Placing the html into the hangman ID
-	document.querySelector("#hangman").innerHTML = html;
-
-
-
-}
-
-
-
-</script>
-	
+<script type="text/javascript" src = "assets/javascript/game.js"></script>
 </body>
-</html>
+</html

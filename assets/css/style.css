@@ -1,0 +1,15 @@
+.top-buffer{
+	margin-top: 50px;
+}
+
+body{
+	background-image: URL("../images/tech.jpg");
+}
+
+h1{
+	color: white;
+}
+
+img{
+	border: 20px solid white;
+}
